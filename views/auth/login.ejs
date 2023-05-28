@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Carter+One&family=Cormorant+SC:wght@500&family=Dancing+Script:wght@400;500;700&family=East+Sea+Dokdo&family=Fascinate&family=Josefin+Sans:ital,wght@0,600;1,400&family=Kalam:wght@300&family=M+PLUS+1+Code:wght@700&family=Macondo&family=Montserrat&family=Nanum+Gothic+Coding&family=New+Rocker&family=Nunito:wght@800&family=Outfit:wght@300&family=Playfair+Display:ital,wght@0,400;1,900&family=Roboto+Mono&family=Roboto+Slab:wght@400;600&family=Roboto:wght@300;400&family=Satisfy&family=Tiro+Bangla&family=Zen+Antique&display=swap"
+        rel="stylesheet">
+
+    <title>ChatTime - Login</title>
+</head>
+<style>
+    .title {
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+    <div class="cont" style="height: 100vh;">
+        <div class="position-absolute shadow p-1" style="width: 100vw;">
+            <img src="/chat_time_logo.png" class="img-fluid" alt="chat time logo" width="100" height="20px">
+        </div>
+        <div class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+            <div class="d-flex justify-content-center align-items-center border border-disabled border-2" style="">
+                <div class="card border-0 mr-2 text-light "
+                    style="width: 30vw; background: linear-gradient(#0d6efd, #0c66ee, #0a52be, #0c54c0, #0a47a1)">
+                    <div class="card-body p-5">
+                        <h3 class="card-title title">Login</h3>
+                        <form action="" class="mt-5 form">
+                            <input type="text" class="form-control my-5" name="username" id="username"
+                                placeholder="@username" autofocus>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Enter your Password..." autofocus>
+                            <button type="submit"
+                                class="my-5 col btn btn-outline-success col-12 text-light border-light"
+                                id="login-btn-submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col col-lg-auto px-5 flex-column">
+                    <div class="d-flex justify-content-center">
+                        <img id="opening_img" alt="" src="/opening_img.png"
+                            class="img-thumbnail img-fluid border-0 my-3" width="200" height="200">
+                    </div>
+                    <blockquote cite="">
+                        <h5 style="font-family: 'Satisfy', cursive;">
+                            <b><i>"...Feel you near with Chat Time"</i></b>
+                        </h5>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="position-absolute" style="bottom: 0;">
+            hey
+        </div>
+    </div>
+</body>
+<script>
+    const btn = document.getElementById('login-btn-submit');
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const form = document.querySelector('.form');
+
+    let admin_username = 'admin';
+    let admin_password = 'adminsecret';
+    // let kas_username = 'kas123';
+    // let kas_password = 'kassecret';
+    // let admin_username = 'admin';
+    // let admin_username = 'admin';
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!e.target.username.value || !e.target.password.value) {
+            isInvalid(e)
+        } else {
+            if (e.target.username.value == admin_username || e.target.password.value == admin_password) {
+                window.location.href = '/admin';
+            }
+        }
+    })
+
+    function isInvalid(e) {
+        if (!e.target.username.value && !e.target.password.value) {
+            addInvalid(username)
+            addInvalid(password);
+        } if (!e.target.username.value) {
+            addInvalid(username)
+        } else if (!e.target.password.value) {
+            addInvalid(password);
+        }
+    }
+
+    function addInvalid(input) {
+        input.classList.add('is-invalid');
+    }
+
+    function isValid(input) {
+        input.addEventListener('change', function () {
+            if (this.value) {
+                this.classList.remove('is-invalid');
+            }
+        })
+    }
+
+    isValid(username);
+    isValid(password);
+</script>
+
+</html>
