@@ -1,0 +1,22 @@
+:root {
+    /* Colors */
+    --remove-input-shadow: #a6d616;
+    --bg-disabled: #cacbc8;
+}
+
+input:focus {
+    box-shadow: none !important;
+    border: 1px solid var(--remove-input-shadow) !important;
+}
+
+.bg-disabled {
+    background: var(--bg-disabled) !important;
+}
+
+.cont {
+    height: 100vh;
+}
+
+.main-cont {
+    overflow: hidden;
+}
