@@ -23,12 +23,42 @@
 </head>
 
 <body>
-    <div class="cont" style="height: 100vh;">
+    <div class="cont" style="height: 100vh; overflow: hidden;">
         <div class="loader-cont bg-primary cont d-flex align-items-center justify-content-center"
             style="height: 100vh;"></div>
         <div class="admin d-none">
-            <div class="admin-header p-4">
-                <img src="/chat_time_logo.png" class="img-fluid" alt="chat time logo" width="100" height="20px">
+            <div class="admin-header">
+                <div class="d-flex">
+                    <div class="border border-disabled border-right col-2 p-2 ">
+                        <img src="/chat_time_logo.png" class="img-fluid" alt="chat time logo" width="75" height="20px">
+                    </div>
+                    <div
+                        class="col shadow d-flex justify-content-end align-items-center px-5 border-bottom border-warning">
+                        <a href="" class="border rounded btn border-primary btn-outline-primary" role="button"
+                            style="border-width: 3px !important;">Sign-out</a>
+                    </div>
+                </div>
+                <div class="d-flex" style="height: 100vh;">
+                    <div
+                        class="col-2 bg-primary py-5 px-1 text-light d-flex justify-content-center flex-column border border-right border-warning">
+                        <div class="text-center">
+                            <h3 class="">Contacts</h3>
+                        </div>
+                        <div class="bg-warning" style="height: 70vh; overflow: hidden;">
+
+                        </div>
+                    </div>
+                    <div class="col p-5">
+                        <div class="card">
+                            <div class="text-center p-5">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
