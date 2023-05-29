@@ -2,8 +2,7 @@ const PRELOADING = "<div class='loader'><i class='fa fa-spin fa-spinner text-pri
 
 const signupCont = document.querySelector('.signup');
 const loaderCont = document.querySelector('.loader-cont');
-const fname = document.getElementById('fname');
-const lname = document.getElementById('lname');
+const uname = document.getElementById('name');
 const username = document.getElementById('username');
 
 loaderCont.innerHTML = PRELOADING;
@@ -14,11 +13,19 @@ setTimeout(() => {
 
 function generateUsername(input) {
     input.addEventListener('change', () => {
-        if (fname.value && lname.value) {
-            username.value = fname.value.slice(0, 1).toLowerCase() + '.' + lname.value.toLowerCase() + '@chatapp.com';
+        if (input.value) {
+            username.value = input.value.toLowerCase() + '@chatapp.com';
         };
     })
 }
 
-generateUsername(fname);
-generateUsername(lname);
+generateUsername(uname);
+
+// const alertDanger = document.querySelector('.alert-danger');
+// const alertSuccess = document.querySelector('.alert-success');
+
+// function hideAlert(alert) {
+//     setTimeout(() => {
+//         $('.alert-danger').toggle('slow');
+//     }, 1000);
+// }

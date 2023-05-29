@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000
 const path = require('path');
 const mongoose = require('mongoose');
 
+
 const Signup = require('./models/signup')
 mongoose.connect('mongodb://localhost:27017/chatApp')
     .then((res) => {
@@ -11,9 +12,10 @@ mongoose.connect('mongodb://localhost:27017/chatApp')
     })
     .catch((err) => {
         console.log('error')
-        // console.log(err)
     })
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
@@ -25,8 +27,37 @@ app.get('/', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-    res.render('auth/signup');
+    res.render('auth/signup', {
+        successMessage: false,
+        errorMessage: false,
+    });
 });
+
+app.post('/signup', async (req, res) => {
+    const checking = await Signup.findOne({ name: req.body.name });
+    try {
+        if (checking.name === req.body.name && checking.password === req.body.password) {
+            res.status(401).render("auth/signup", {
+                successMessage: false,
+                errorMessage: 'User already exists',
+            })
+        } else if (req.body.password !== req.body.password_confirmation) {
+            res.status(401).render("auth/signup", {
+                successMessage: false,
+                errorMessage: 'Password and confirm password does not match',
+            })
+        }
+    }
+    catch (err) {
+        const newSignup = new Signup(req.body);
+        await newSignup.save();
+        console.log(newSignup);
+        res.status(201).render("auth/signup", {
+            successMessage: 'User created successfully!',
+            errorMessage: false,
+        })
+    }
+})
 
 app.get('/admin', (req, res) => {
     res.render('admin/index');
