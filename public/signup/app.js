@@ -4,6 +4,7 @@ const signupCont = document.querySelector('.signup');
 const loaderCont = document.querySelector('.loader-cont');
 const uname = document.getElementById('name');
 const username = document.getElementById('username');
+const password = document.getElementById('password');
 
 loaderCont.innerHTML = PRELOADING;
 setTimeout(() => {
@@ -21,11 +22,20 @@ function generateUsername(input) {
 
 generateUsername(uname);
 
-// const alertDanger = document.querySelector('.alert-danger');
-// const alertSuccess = document.querySelector('.alert-success');
+const alertDanger = document.querySelector('.alert-danger');
+const alertSuccess = document.querySelector('.alert-success');
 
 // function hideAlert(alert) {
 //     setTimeout(() => {
 //         $('.alert-danger').toggle('slow');
 //     }, 1000);
 // }
+if (alertDanger.display !== 'none') {
+    uname.classList.add('is-invalid');
+    username.classList.add('is-invalid');
+    password.classList.add('is-invalid');
+}
+
+if (uname.value !== '') {
+    username.value = input.value.toLowerCase() + '@chatapp.com';
+}
