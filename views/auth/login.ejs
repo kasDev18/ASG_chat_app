@@ -47,20 +47,30 @@
                 <div>
                     <div class="card-body p-5">
                         <h3 class="card-title title text-center">Login</h3>
-                        <form action="" class=" mt-5 form" style="width: 20vw;">
-                            <input type="text" class="form-control my-5" name="username" id="username"
-                                placeholder="@username" autofocus>
-                            <input type="password" class="form-control" name="password" id="password"
-                                placeholder="Enter your Password..." autofocus>
-                            <button type="submit"
-                                class="my-5 col btn btn-outline-success col-12 text-success border-success"
-                                id="login-btn-submit">Submit</button>
-                            <div class="text-center text-disabled">
-                                <p>
-                                    <b>Not yet Registered? Signup <a href="/signup" class="text-primary">HERE!</a></b>
-                                </p>
+                        <% if(successMessage !==false) { %>
+                            <div class="alert alert-success" role="alert">
+                                <%= successMessage %>
                             </div>
-                        </form>
+                            <% } else if(errorMessage !==false) { %>
+                                <div class="alert alert-danger" role="alert">
+                                    <%= errorMessage %>
+                                </div>
+                                <% } %>
+                                    <form action="/admin" class="mt-5 form" method="POST" style="width: 20vw;">
+                                        <input type="text" class="form-control my-5" name="username" id="username"
+                                            placeholder="@username" autofocus required>
+                                        <input type="password" class="form-control" name="password" id="password"
+                                            placeholder="Enter your Password..." autofocus required>
+                                        <button type="submit"
+                                            class="my-5 col btn btn-outline-success col-12 text-success border-success"
+                                            id="login-btn-submit">Submit</button>
+                                        <div class="text-center text-disabled">
+                                            <p>
+                                                <b>Not yet Registered? Signup <a href="/signup"
+                                                        class="text-primary">HERE!</a></b>
+                                            </p>
+                                        </div>
+                                    </form>
                     </div>
                 </div>
                 <div class="col col-lg-auto px-5 text-center">
@@ -78,55 +88,5 @@
         </div>
     </div>
 </body>
-<script>
-    const btn = document.getElementById('login-btn-submit');
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
-    const form = document.querySelector('.form');
-
-    let admin_username = 'admin';
-    let admin_password = 'adminsecret';
-    // let kas_username = 'kas123';
-    // let kas_password = 'kassecret';
-    // let admin_username = 'admin';
-    // let admin_username = 'admin';
-
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!e.target.username.value || !e.target.password.value) {
-            isInvalid(e)
-        } else {
-            if (e.target.username.value == admin_username || e.target.password.value == admin_password) {
-                window.location.href = '/admin';
-            }
-        }
-    })
-
-    function isInvalid(e) {
-        if (!e.target.username.value && !e.target.password.value) {
-            addInvalid(username)
-            addInvalid(password);
-        } if (!e.target.username.value) {
-            addInvalid(username)
-        } else if (!e.target.password.value) {
-            addInvalid(password);
-        }
-    }
-
-    function addInvalid(input) {
-        input.classList.add('is-invalid');
-    }
-
-    function isValid(input) {
-        input.addEventListener('change', function () {
-            if (this.value) {
-                this.classList.remove('is-invalid');
-            }
-        })
-    }
-
-    isValid(username);
-    isValid(password);
-</script>
 
 </html>

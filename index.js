@@ -4,8 +4,8 @@ const port = process.env.PORT || 3000
 const path = require('path');
 const mongoose = require('mongoose');
 
+const Signup = require('./models/signup');
 
-const Signup = require('./models/signup')
 mongoose.connect('mongodb://localhost:27017/chatApp')
     .then((res) => {
         console.log('connections successful')
@@ -23,7 +23,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public/images'));
 
 app.get('/', (req, res) => {
-    res.render('auth/login');
+    res.render('auth/login', {
+        successMessage: false,
+        errorMessage: false,
+    });
 });
 
 app.get('/signup', (req, res) => {
@@ -59,10 +62,29 @@ app.post('/signup', async (req, res) => {
     }
 })
 
+
+app.post('/admin', async (req, res) => {
+
+    const check = await Signup.findOne({ name: req.body.name })
+
+    try {
+        if (check.password !== req.body.password && check.username !== req.body.username) {
+            res.status(401).render("auth/login", {
+                successMessage: false,
+                errorMessage: 'Invalid Credentials',
+            })
+        }
+    } catch (err) {
+        res.status(201).render("admin/index", {
+            successMessage: 'User created successfully!',
+            errorMessage: false,
+        })
+    }
+})
+
 app.get('/admin', (req, res) => {
     res.render('admin/index');
 });
-
 
 app.listen(port, () => {
     console.log(`LISTENING TO PORT ${port}`)
