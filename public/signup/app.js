@@ -5,6 +5,7 @@ const loaderCont = document.querySelector('.loader-cont');
 const uname = document.getElementById('name');
 const username = document.getElementById('username');
 const password = document.getElementById('password');
+const password_confirmation = document.getElementById('password_confirmation');
 const invalidFeedback = document.querySelector('.invalid-feedback');
 
 invalidFeedback.innerTHML = '';
@@ -43,7 +44,6 @@ const alertDanger = document.querySelector('.alert-danger');
 const alertSuccess = document.querySelector('.alert-success');
 
 if (alertDanger) {
-    uname.classList.add('is-invalid');
-    username.classList.add('is-invalid');
     password.classList.add('is-invalid');
+    password_confirmation.classList.add('is-invalid');
 }

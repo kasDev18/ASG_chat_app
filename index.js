@@ -44,23 +44,27 @@ app.post('/signup', async (req, res) => {
                 successMessage: false,
                 errorMessage: 'User already exists',
             })
-        } else if (req.body.password !== req.body.password_confirmation) {
+        }
+    }
+    catch {
+        const newSignup = new Signup(req.body);
+
+        if (newSignup.password !== newSignup.password_confirmation) {
             res.status(401).render("auth/signup", {
                 successMessage: false,
                 errorMessage: 'Password and confirm password does not match',
             })
+
+        } else {
+            await newSignup.save();
+            console.log(newSignup);
+            res.status(201).render("auth/signup", {
+                successMessage: 'User created successfully!',
+                errorMessage: false,
+            });
         }
     }
-    catch (err) {
-        const newSignup = new Signup(req.body);
-        await newSignup.save();
-        console.log(newSignup);
-        res.status(201).render("auth/signup", {
-            successMessage: 'User created successfully!',
-            errorMessage: false,
-        })
-    }
-})
+});
 
 
 app.post('/admin', async (req, res) => {
