@@ -82,9 +82,18 @@ app.post('/admin', async (req, res) => {
     }
 })
 
-app.get('/admin', (req, res) => {
-    res.render('admin/index');
+app.get('/admin', async (req, res) => {
+    const users = await Signup.find({})
+    res.render('admin/index', { users });
 });
+
+app.get('/admin/:id', async (req, res) => {
+    const { id } = req.params;
+    const users = await Signup.find({});
+    const server = await Signup.findById(id);
+    res.render('admin/edit', { users, server });
+});
+
 
 app.listen(port, () => {
     console.log(`LISTENING TO PORT ${port}`)
