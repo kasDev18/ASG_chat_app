@@ -5,6 +5,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 
 const Signup = require('./models/signup');
+let status = '';
 
 mongoose.connect('mongodb://localhost:27017/chatApp')
     .then((res) => {
@@ -96,6 +97,12 @@ app.get('/admin/:id', async (req, res) => {
     const users = await Signup.find({});
     const server = await Signup.findById(id);
     res.render('admin/edit', { users, server });
+});
+
+// 404 Page
+app.use((req, res) => {
+    status = 404;
+    res.status(status).render('admin/error', { status });
 });
 
 
