@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000
 const path = require('path');
+const engine = require('ejs-mate');
 const mongoose = require('mongoose');
 
 const Signup = require('./models/signup');
@@ -17,6 +18,8 @@ mongoose.connect('mongodb://localhost:27017/chatApp')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
