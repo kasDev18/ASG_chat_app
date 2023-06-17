@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 
 const Signup = require('./models/signup');
 let status = '';
+const AppError = require('./errors');
 
 mongoose.connect('mongodb://localhost:27017/chatApp')
     .then((res) => {
@@ -25,6 +26,12 @@ app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public/images'));
+
+function wrapAsync(fn) {
+    return function (req, res, next) {
+        fn(req, res, next).catch(e => next(e))
+    }
+}
 
 app.get('/', (req, res) => {
     res.render('auth/login', {
@@ -95,12 +102,15 @@ app.get('/admin', async (req, res) => {
     res.render('admin/index', { users });
 });
 
-app.get('/admin/:id', async (req, res) => {
+app.get('/admin/:id', wrapAsync(async (req, res, next) => {
     const { id } = req.params;
     const users = await Signup.find({});
     const server = await Signup.findById(id);
+    if(!server){
+        return next(new AppError('User Not Found', 400));
+    }
     res.render('admin/edit', { users, server });
-});
+}));
 
 // 404 Page
 app.use((req, res) => {
@@ -108,6 +118,10 @@ app.use((req, res) => {
     res.status(status).render('admin/error', { status });
 });
 
+app.use((err, req, res, next) => {
+    const { status = 500, message = 'Something went wrong' } = err;
+    res.status(status).send(message);
+})
 
 app.listen(port, () => {
     console.log(`LISTENING TO PORT ${port}`)
