@@ -1,11 +1,18 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 const path = require('path');
 const engine = require('ejs-mate');
 const mongoose = require('mongoose');
 
+const admin = require('./routes/admin');
+const signup = require('./routes/signup');
+
 const Signup = require('./models/signup');
+
+app.use('/admin', admin);
+app.use('/signup', signup);
+
 let status = '';
 
 mongoose.connect('mongodb://127.0.0.1:27017/chatApp')
@@ -37,6 +44,7 @@ app.get('/', (req, res) => {
     });
 });
 
+<<<<<<< Updated upstream
 app.get('/signup', (req, res) => {
     res.render('auth/signup', {
         successMessage: false,
@@ -105,6 +113,8 @@ app.get('/admin/:id', wrapAsync(async (req, res, next) => {
     res.render('admin/edit', { users, server });
 }));
 
+=======
+>>>>>>> Stashed changes
 // 404 Page
 app.use((req, res) => {
     status = 404;
