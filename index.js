@@ -4,12 +4,19 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 const engine = require('ejs-mate');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
 
 const admin = require('./routes/admin');
 const signup = require('./routes/signup');
 
 const Signup = require('./models/signup');
 
+app.use(morgan('tiny'));
+app.use((req, res, next) => {
+    console.log("Success!!");
+    return next();
+    console.log("Success!!");
+});
 app.use('/admin', admin);
 app.use('/signup', signup);
 
