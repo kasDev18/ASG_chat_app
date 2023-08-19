@@ -38,6 +38,7 @@ app.use(express.static('public/images'));
 
 const wrapAsync = require('./utils/catchAsync');
 const AppError = require('./utils/ExpressError');
+const { Sign } = require('crypto');
 
 
 app.get('/', (req, res) => {
@@ -48,13 +49,20 @@ app.get('/', (req, res) => {
 });
 
 app.post('/signup', async (req, res) => {
-    res.send(req.body);
-    // const newSignup = new Signup(req.body.signup);
-    // await newSignup.save();
-    // res.render("auth/signup", {
-    //         successMessage: 'User created successfully!',
-    //         errorMessage: false,
-    //     });
+    const newSignup = new Signup(req.body.signup);
+    const validateUser = await Signup.findAndValidate(newSignup.name);
+    if(!validateUser){
+        res.render("auth/signup", {
+            successMessage: false,
+            errorMessage: 'Given name was already saved! Duplicate Data!',
+        });
+    }else{
+        await newSignup.save();
+        res.render("auth/signup", {
+            successMessage: 'User created successfully!',
+            errorMessage: false,
+        });
+    }
 });
 
 // 404 Page
