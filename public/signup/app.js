@@ -17,17 +17,16 @@ setTimeout(() => {
 }, 1500);
 
 function generateUsername(input) {
-    input.addEventListener('change', function () {
+    input.addEventListener('focusout', function () {
         if (input.value) {
             // const name = input.value.replace(/\s/g, "");
-            const str = input.value.split(' ');
-            const fname = str[0];
-            const lname = str[str.length - 1];
+            let str = input.value.split(' ');
 
-            if (str.length == 1 || !lname) {
-                uname.classList.add('is-invalid');
-                invalidFeedback.innerHTML = 'Please enter a valid complete name!';
+            if (str.length < 2) {
+                username.value = input.value.toLowerCase() + '@chatapp.com';
             } else {
+                const fname = str[0];
+                const lname = str[str.length - 1];
                 uname.classList.remove('is-invalid');
                 invalidFeedback.innerHTML = '';
                 const fnameFirstChar = fname.slice(0, 1);

@@ -1,24 +1,20 @@
 const express = require('express');
 const app = express();
+
 const port = process.env.PORT || 3000;
 const path = require('path');
 const engine = require('ejs-mate');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 
-const admin = require('./routes/admin');
-const signup = require('./routes/signup');
-
 const Signup = require('./models/signup');
 
+const adminRoutes = require('./routes/admin');
+const signupRoutes = require('./routes/signup');
+
 app.use(morgan('tiny'));
-app.use((req, res, next) => {
-    console.log("Success!!");
-    return next();
-    console.log("Success!!");
-});
-app.use('/admin', admin);
-app.use('/signup', signup);
+app.use('/admin', adminRoutes);
+app.use('/signup', signupRoutes);
 
 let status = '';
 
@@ -51,6 +47,16 @@ app.get('/', (req, res) => {
     });
 });
 
+app.post('/signup', async (req, res) => {
+    res.send(req.body);
+    // const newSignup = new Signup(req.body.signup);
+    // await newSignup.save();
+    // res.render("auth/signup", {
+    //         successMessage: 'User created successfully!',
+    //         errorMessage: false,
+    //     });
+});
+
 // 404 Page
 app.use((req, res) => {
     status = 404;
@@ -58,10 +64,10 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-    const { status = 500, message = 'Something went wrong' } = err;
-    res.status(status).render('errors', { err });
+    const { statusCode = 500 } = err;
+    if (!err.message) err.message = "Oh no! Something went wrong";
+    res.status(statusCode).render('errors', { err });
 })
-
 app.listen(port, () => {
     console.log(`LISTENING TO PORT ${port}`)
 })
