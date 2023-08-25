@@ -24,3 +24,12 @@ input:focus {
 .conversation .card {
     height: 50vh;
 }
+
+.alert-dismissible {
+    opacity: 0;
+    transition: opacity .5s; 
+}
+
+.alert-dismissible.fade {
+    opacity: 1;
+}

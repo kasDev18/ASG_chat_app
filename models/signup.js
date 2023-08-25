@@ -18,8 +18,6 @@ const signupSchema = new mongoose.Schema({
 
 signupSchema.statics.findAndValidate = async function(name){
     const foundName = await this.findOne({name});
-    // const username = await this.findOne({name});
-    // const foundUserName = await this.findOne({name});
     return foundName ? false : true;
 }
 

@@ -6,15 +6,13 @@ const path = require('path');
 const engine = require('ejs-mate');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const Signup = require('./models/signup');
 
 const adminRoutes = require('./routes/admin');
 const signupRoutes = require('./routes/signup');
-
-app.use(morgan('tiny'));
-app.use('/admin', adminRoutes);
-app.use('/signup', signupRoutes);
 
 let status = '';
 
@@ -26,8 +24,31 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp')
         console.log('error')
     })
 
+
+const sessionOptions = { 
+    secret: 'thisisnotagoodsecret',
+    resave: false, 
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    } 
+};
+    
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session(sessionOptions));
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
+
+app.use(morgan('tiny'));
+app.use('/admin', adminRoutes);
+app.use('/signup', signupRoutes);
 
 app.engine('ejs', engine);
 app.set('view engine', 'ejs');
@@ -36,7 +57,6 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public/images'));
 
-const wrapAsync = require('./utils/catchAsync');
 const AppError = require('./utils/ExpressError');
 const { Sign } = require('crypto');
 
@@ -46,23 +66,6 @@ app.get('/', (req, res) => {
         successMessage: false,
         errorMessage: false,
     });
-});
-
-app.post('/signup', async (req, res) => {
-    const newSignup = new Signup(req.body.signup);
-    const validateUser = await Signup.findAndValidate(newSignup.name);
-    if(!validateUser){
-        res.render("auth/signup", {
-            successMessage: false,
-            errorMessage: 'Given name was already saved! Duplicate Data!',
-        });
-    }else{
-        await newSignup.save();
-        res.render("auth/signup", {
-            successMessage: 'User created successfully!',
-            errorMessage: false,
-        });
-    }
 });
 
 // 404 Page
