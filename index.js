@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
 
 const Signup = require('./models/signup');
 
@@ -23,6 +25,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatApp')
     .catch((err) => {
         console.log('error')
     })
+
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
 
 
 const sessionOptions = { 
@@ -46,13 +52,16 @@ app.use((req, res, next) => {
     next();
 })
 
+app.use(passport.initialize());
+app.use(passport.session());
+// passport.use(new LocalStrategy(Signup.authenticate()));
+
+// passport.serializeUser(Signup.serializeUser());
+// passport.deserializeUser(Signup.deserializeUser());
+
 app.use(morgan('tiny'));
 app.use('/admin', adminRoutes);
 app.use('/signup', signupRoutes);
-
-app.engine('ejs', engine);
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public/images'));
