@@ -26,30 +26,25 @@
                 <div>
                     <div class="card-body p-5">
                         <h3 class="card-title title text-center">Login</h3>
-                        <% if(successMessage !==false) { %>
-                            <div class="alert alert-success" role="alert">
-                                <%= successMessage %>
+                        <div class="mt-3">
+                            <%- include('../partials/flash.ejs') %>
+                        </div>
+                        <form action="/login" class="mt-5 form" method="POST" style="width: 20vw;" autocomplete="off">
+                            <input type="text" class="form-control my-5" name="username" id="username"
+                                placeholder="@username" autofocus required autocomplete="off">
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Enter your Password..." autofocus required>
+                            <button type="submit"
+                                class="my-5 col btn btn-outline-success col-12 text-success border-success"
+                                id="login-btn-submit">Submit
+                            </button>
+                            <div class="text-center text-disabled">
+                                <p>
+                                    <b>Not yet Registered? Signup <a href="/signup"
+                                            class="text-primary">HERE!</a></b>
+                                </p>
                             </div>
-                            <% } else if(errorMessage !==false) { %>
-                                <div class="alert alert-danger" role="alert">
-                                    <%= errorMessage %>
-                                </div>
-                                <% } %>
-                                    <form action="/admin" class="mt-5 form" method="POST" style="width: 20vw;">
-                                        <input type="text" class="form-control my-5" name="username" id="username"
-                                            placeholder="@username" autofocus required autocomplete="off">
-                                        <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Enter your Password..." autofocus required>
-                                        <button type="submit"
-                                            class="my-5 col btn btn-outline-success col-12 text-success border-success"
-                                            id="login-btn-submit">Submit</button>
-                                        <div class="text-center text-disabled">
-                                            <p>
-                                                <b>Not yet Registered? Signup <a href="/signup"
-                                                        class="text-primary">HERE!</a></b>
-                                            </p>
-                                        </div>
-                                    </form>
+                        </form>
                     </div>
                 </div>
                 <div class="col col-lg-auto px-5 text-center">
