@@ -18,10 +18,10 @@
         })
 })()
 
-setTimeout(function () {
-    const alert = document.querySelector('.alert-dismissible');
-    alert.classList.toggle('fade');
-    setTimeout(() => {
-        alert.classList.add('d-none');
-    }, 100)
-}, 5000);
+// setTimeout(function () {
+//     const alert = document.querySelector('.alert-dismissible');
+//     alert.classList.toggle('fade');
+//     setTimeout(() => {
+//         alert.classList.add('d-none');
+//     }, 100)
+// }, 5000);
