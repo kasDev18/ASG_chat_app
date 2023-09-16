@@ -34,7 +34,7 @@
         </div>
         <div class="col landing-right">
             <div class="d-flex flex-column">
-                <div class="d-flex justify-content-end p-3" style="height: 10vh;">
+                <div class="d-flex justify-content-end p-3" style="height: 8vh;">
                     <div class="dropdown dropstart">
                         <a type="button" class="btn btn-outline-primary border-0" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="/images/admin-icon-png-2.png" alt="" height="30" width="30">
@@ -49,10 +49,17 @@
                         </ul>
                     </div>
                 </div>
-                <div class="bg-success landing-body p-3" style="border-radius: 15px 0 0 0;  background: linear-gradient(#003380, #003d99, #0047b3, #0052cc, #005ce6); height: 90vh;">
+                <div class="bg-success landing-body p-3" style="border-radius: 15px 0 0 0;  background: linear-gradient(#003380, #003d99, #0047b3, #0052cc, #005ce6); height: 92vh;">
                     <%- include('../partials/flash.ejs') %>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    const btnClose = document.querySelector('.btn-close');
+    setTimeout(() => {
+        // alert('hey');
+        btnClose.dispatchEvent(new Event("click"));
+    }, 5000);
+</script>

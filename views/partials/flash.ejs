@@ -1,7 +1,7 @@
 <% if(success && success.length) {%>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <%= success %>
-        <!-- <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button> -->
+        <button type="button" class="btn-close d-none" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     <% } %>
 
@@ -11,3 +11,14 @@
             <!-- <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button> -->
         </div>
         <% } %>
+<script>
+    function hideAlert(first, second){
+        const btnClose = document.querySelector('.alert-dismissible');
+        setTimeout(() => {
+            btnClose.classList.remove('show');
+            setTimeout(() => {
+                btnClose.classList.add('d-none');
+            }, second);
+        }, first);
+    }
+</script>
