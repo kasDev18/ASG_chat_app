@@ -1,8 +1,56 @@
 <% layout('layouts/boilerplate')%>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="/login/style.css">
-
-    <div>
-        index page
+<style>
+    .messages-nav, .landing-right{
+        background: linear-gradient(#003380, #003d99, #0047b3, #0052cc, #005ce6);
+    }
+    .messages-nav span{
+        color: var(--remove-input-shadow);
+    }
+    .messages:hover{
+        background-color: rgba(0, 51, 128, 0.9);
+    }
+</style>
+<div class="cont" style="height: 100vh;">
+    <div class="loader-cont cont d-flex align-items-center justify-content-center"></div>
+    <div class="d-flex landing-index d-none text-center" style="height: 100vh;">
+        <div class="col-3 messages-nav" style="width: 20%;">
+            <div style="height: 10vh;" class="d-flex justify-content-center align-items-center text-light">
+                <img src="https://trackingtime.co/wp-content/themes/trackingtime-v4/img/button/google-chat.png?x84554" width="20" height="20" alt="logo">
+                <b>Messages</b>
+            </div>
+            <% for(let user of users) {%>
+                <div style="height: 5%; width: 100%;" class="d-flex align-items-center px-3 py-4 messages">
+                    <% if(user._id !== userID) { %>
+                        <div class="col-2">
+                            <img src="https://th.bing.com/th/id/OIP.4Tyw1sJPJgN6NPt1tdSS0wHaJG?w=134&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt="" width="30" height="30">
+                        </div>
+                        <div class="col mx-3 d-flex align-items-center justify-content-start">
+                            <b><span class=""><%= user.name %></span></b>
+                        </div>
+                        <% } %>
+                </div>
+                <hr class="my-0">
+                <% } %>
+        </div>
+        <div class="col landing-right">
+            <div class="d-flex flex-column">
+                <div class="p-2 d-flex justify-content-end p-3" style="height: 10vh;">
+                    <div class="dropdown dropstart">
+                        <a type="button" class="btn btn-outline-primary" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-gear"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-success landing-body" style="border-radius: 15px 0 0 0; background-color: white !important; height: 90vh;">
+                    heyyy
+                </div>
+            </div>
+        </div>
     </div>
+</div>

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { name, username, password } = require('./seeds');
-const Signup = require('../../models/signup');
+const { name, username, password, isOnline } = require('./seeds');
+const Signup = require('../../models/User');
 
-mongoose.connect('mongodb://localhost:27017/chatApp');
+mongoose.connect('mongodb://127.0.0.1:27017/chatApp');
 
 const db = mongoose.connection;
 
@@ -21,6 +21,7 @@ const seedDB = async () => {
         const new_user = new Signup({
             name: name[i],
             username: username[i],
+            isOnline: isOnline[i],
             password: password[i]
         })
 
@@ -30,4 +31,4 @@ const seedDB = async () => {
 
 seedDB().then(() => {
     mongoose.connection.close();
-});;
+});

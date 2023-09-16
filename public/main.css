@@ -2,6 +2,9 @@
     /* Colors */
     --remove-input-shadow: #a6d616;
     --bg-disabled: #cacbc8;
+
+    /* Primary Colors */
+    --blue: #0066ff;
 }
 
 input:focus {

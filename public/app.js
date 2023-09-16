@@ -16,6 +16,17 @@
                 form.classList.add('was-validated')
             }, false)
         })
+
+    //Loading function
+    const PRELOADING = "<div class='loader'><i class='fa fa-spin fa-spinner text-primary' style='font-size: 50px'></i></div>";
+    const landingIndex = document.querySelector('.landing-index');
+    const loaderCont = document.querySelector('.loader-cont');
+
+    loaderCont.innerHTML = PRELOADING;
+    setTimeout(() => {
+        loaderCont.classList.add('d-none');
+        landingIndex.classList.remove('d-none');
+    }, 1500);
 })()
 
 // setTimeout(function () {
