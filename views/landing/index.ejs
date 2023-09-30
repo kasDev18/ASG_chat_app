@@ -1,4 +1,4 @@
-<% layout('layouts/boilerplate')%>
+<% layout('landing/layouts/boilerplate')%>
 
 <style>
     /* .messages-nav, .landing-right{
@@ -12,7 +12,7 @@
     }
 </style>
 <div class="cont" style="height: 100vh;">
-    <div class="loader-cont cont d-flex align-items-center justify-content-center"></div>
+    <div class="loader-cont cont d-flex align-items-center justify-content-center" style="height: 100vh;"></div>
     <div class="d-flex landing-index d-none text-center" style="height: 100vh;">
         <div class="col-3 messages-nav" style="width: 20%;">
             <div style="height: 10vh;" class="d-flex justify-content-start align-items-center text-light px-3 mb-3">
@@ -37,6 +37,7 @@
                 <div class="d-flex justify-content-end p-3" style="height: 8vh;">
                     <div class="dropdown dropstart">
                         <a type="button" class="btn btn-outline-primary border-0" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= userName %>
                             <img src="/images/admin-icon-png-2.png" alt="" height="30" width="30">
                             <i class="fa-solid fa-caret-down"></i>
                             <!-- <i class="fa-solid fa-gear"></i> -->
@@ -51,6 +52,7 @@
                 </div>
                 <div class="bg-success landing-body p-3" style="border-radius: 15px 0 0 0;  background: linear-gradient(#003380, #003d99, #0047b3, #0052cc, #005ce6); height: 92vh;">
                     <%- include('../partials/flash.ejs') %>
+                    
                 </div>
             </div>
         </div>
