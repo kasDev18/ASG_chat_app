@@ -27,7 +27,7 @@ module.exports.indexLogin = (req, res) => {
 
 module.exports.login = async(req, res) => {
     req.flash('success', 'Welcome back '+ req.user.name.toUpperCase() + '!');
-    const redirectUrl = res.locals.returnTo || '/index';
+    const redirectUrl = res.locals.returnTo || '/landing';
     res.redirect(redirectUrl);
 }
 

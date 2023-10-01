@@ -69,7 +69,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/', userRoutes);
-app.use('/', landingRoutes);
+app.use('/landing', landingRoutes);
 
 let status = '';
 

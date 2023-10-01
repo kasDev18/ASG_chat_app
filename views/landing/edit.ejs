@@ -1,67 +1,32 @@
-<% layout('layouts/boilerplate')%>
-    <!-- CSS -->
-    <link rel="stylesheet" href="/login/style.css">
+<% layout('landing/layouts/boilerplate')%>
 
-    <div class="cont" style="height: 100vh; overflow: hidden;">
-        <div class="loader-cont bg-primary cont d-flex align-items-center justify-content-center"
-            style="height: 100vh;"></div>
-        <div class="admin d-none">
-            <div class="admin-header">
-                <div class="d-flex">
-                    <div class="border border-disabled border-right col-2 p-2 ">
-                        <img src="/chat_time_logo.png" class="img-fluid" alt="chat time logo" width="75" height="20px">
-                    </div>
-                    <div
-                        class="col shadow d-flex justify-content-end align-items-center px-5 border-bottom border-warning">
-                        <a href="" class="border rounded btn border-primary btn-outline-primary" role="button"
-                            style="border-width: 3px !important;">Sign-out</a>
+<div class="cont" style="height: 100vh;">
+    <div class="loader-cont cont d-flex align-items-center justify-content-center" style="height: 100vh;"></div>
+    <div class="d-flex landing-index d-none text-center" style="height: 100vh;">
+        <%- include('./partials/_navbar.ejs') %>
+        <div class="col landing-right">
+            <div class="d-flex flex-column">
+                <div class="d-flex justify-content-end p-3" style="height: 8vh;">
+                    <div class="dropdown dropstart">
+                        <a type="button" class="btn btn-outline-primary border-0" data-bs-toggle="dropdown" aria-expanded="false">
+                            <%= userName %>
+                            <img src="/images/admin-icon-png-2.png" alt="" height="30" width="30">
+                            <i class="fa-solid fa-caret-down"></i>
+                            <!-- <i class="fa-solid fa-gear"></i> -->
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="d-flex" style="height: 100vh;">
-                    <div
-                        class="col-2 bg-primary py-5 px-1 text-light d-flex justify-content-center flex-column border border-right border-warning">
-                        <div class="text-center">
-                            <h3 class="">Contacts</h3>
-                        </div>
-                        <div class="" style="height: 70vh; overflow: hidden;">
-                            <% for(let user of users) {%>
-                                <li class="col-lg-12">
-                                    <a type="btn" href="/admin/<%= user._id %>"
-                                        class="btn btn-outline-warning text-light col-lg-12">
-                                        <%= user.name %>
-                                    </a>
-                                </li>
-                                <% } %>
-                        </div>
-                    </div>
-                    <div class="col p-5 conversation">
-                        <div class="card">
-                            <div class="text-center p-5">
-                                <h5 class="card-title">
-                                    <%= server.name %>
-                                </h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional
-                                    content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                        </div>
-                        <div class="card py-3 px-2 my-4 reply d-flex align-items-center">
-                            <textarea name="" class="form-control col"></textarea>
-                        </div>
-                    </div>
+                <div class="bg-success landing-body p-3" style="border-radius: 15px 0 0 0;  background: linear-gradient(#003380, #003d99, #0047b3, #0052cc, #005ce6); height: 92vh;">
+                    <%- include('../partials/flash.ejs') %>
+                    Index Page
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        const PRELOADING = "<div class='loader'><i class='fa fa-spin fa-spinner text-light' style='font-size: 50px'></i></div>";
-
-        const container = document.querySelector('.cont');
-        const adminCont = document.querySelector('.admin');
-        const loaderCont = document.querySelector('.loader-cont');
-        loaderCont.innerHTML = PRELOADING;
-        setTimeout(() => {
-            loaderCont.classList.add('d-none');
-            adminCont.classList.remove('d-none');
-        }, 1500);
-    </script>
+</div>
