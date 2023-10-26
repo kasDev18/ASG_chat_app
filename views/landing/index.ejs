@@ -10,6 +10,22 @@
     .messages:hover{
         background-color: rgb(233, 231, 231);
     }
+
+    .cont, .cont span, .cont li a{
+        font-size: small;
+    }
+
+    .cont li a{
+        color: whitesmoke;
+    }
+
+    .dropdown-menu{
+        background: linear-gradient(#003380, #003d99, #0047b3, #0052cc, #005ce6) !important;
+    }
+
+    .dropdown-menu div span{
+        color: #a6d616;
+    }
 </style>
 <div class="cont" style="height: 100vh;">
     <div class="loader-cont cont d-flex align-items-center justify-content-center" style="height: 100vh;"></div>
@@ -19,17 +35,21 @@
             <div class="d-flex flex-column">
                 <div class="d-flex justify-content-end p-3" style="height: 8vh;">
                     <div class="dropdown dropstart">
-                        <a type="button" class="btn btn-outline-primary border-0" data-bs-toggle="dropdown" aria-expanded="false">
-                            <%= userName %>
-                            <img src="/images/admin-icon-png-2.png" alt="" height="30" width="30">
+                        <a type="button" class="btn btn-outline-primary border-0 " data-bs-toggle="dropdown" aria-expanded="false">
+                            <b><span class="text-uppercase"><%= userName %></span></b>
+                            <img src="/images/admin-icon-png-2.png" alt="" height="20" width="20">
                             <i class="fa-solid fa-caret-down"></i>
                             <!-- <i class="fa-solid fa-gear"></i> -->
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <ul class="dropdown-menu shadow">
+                            <div class="d-flex justify-content-center align-items-center p-3">
+                                <img src="/images/admin-icon-png-2.png" alt="" height="30" width="30" class="mx-2">
+                                <span>@</span><span style="font-size: larger; font-family: 'Times New Roman', Times, serif;"><%= userName %></span>
+                            </div>
+                            <li class="border-top border-bottom border-secondary"><a class="dropdown-item" href="#">Edit Profile</a></li>
+                            <li class="border-top border-bottom border-secondary"><a class="dropdown-item" href="#">Action</a></li>
+                            <li class="border-top border-bottom border-secondary"><a class="dropdown-item" href="#">Another action</a></li>
+                            <li class="border-top border-bottom border-secondary"><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
