@@ -1,0 +1,67 @@
+<style>
+    .notif-list:hover{
+        background-color: rgb(233, 231, 231);
+    }
+    /* Popover */
+    .popover {
+        border: 2px dotted red;
+    }
+    .popover-title {
+        background-color: #73AD21; 
+        color: #FFFFFF; 
+        font-size: x-small;
+        text-align:center;
+    }
+    /* Popover Body */
+    .popover-body {
+        background-color: coral;
+        color: #FFFFFF;
+        padding: 100px;
+    }
+    /* Popover Arrow */
+    .arrow {
+        border-right-color: red !important;
+    }
+    .fa-bell:hover{
+        color: #0D6EFD;   
+    }
+
+    .dropdown-menu{
+        background: linear-gradient(#003380, #003d99, #0047b3, #0052cc, #005ce6) !important;
+    }
+
+    .dropdown-menu li a:hover{
+        color: 1px solid black;
+    }
+</style>
+<div class="d-flex align-items-end notif-icon dropdown" style="transform: translateY(15px);">
+    <a type="button" href="#" title="Header" data-bs-trigger="hover" data-bs-toggle="dropdown" data-content="Some content"  class="px-2 btn" style="color: rgb(187, 186, 186);" aria-expanded="false">   
+        <span style="height: 15px; width: 15px; transform: translate(5px, -6px); font-size: x-small;" class="position-absolute bg-danger text-light text-center rounded-circle"><b>3</b></span>
+        <i class="fa-solid fa-bell"></i>
+    </a>
+    <ul class="dropdown-menu shadow py-0 text-dark" style="transform: translateX(100px) !important;">
+        <li class="border-top border-bottom border-secondary py-2"><a class="dropdown-item" href="#"><b><span style="color: #a6d616;">@kascatindoy</span></b> was added as new user!</a></li>
+        <li class="border-bottom border-secondary py-2"><a class="dropdown-item" href="#">Action</a></li>
+        <li class="border-bottom border-secondary py-2"><a class="dropdown-item" href="#">Another action</a></li>
+        <li class="border-bottom border-secondary py-2"><a class="dropdown-item" href="/logout">Logout</a></li>
+    </ul>
+    <span class="mx-2" style="color: rgb(187, 186, 186); transform: translate(5px, -10px);">|</span>
+</div>
+<div class="dropdown">
+    <a type="button" class="btn btn-outline-primary border-0 " data-bs-toggle="dropdown" aria-expanded="false">
+        <!-- <b><span class="text-uppercase"><%= userName %></span></b> -->
+        <img src="/images/admin-icon-png-2.png" alt="" height="20" width="20">
+        <i class="fa-solid fa-caret-down"></i>
+        <!-- <i class="fa-solid fa-gear"></i> -->
+    </a>
+    <ul class="dropdown-menu shadow menu">
+        <div class="d-flex justify-content-center align-items-center p-3">
+            <img src="/images/admin-icon-png-2.png" alt="" height="30" width="30" class="mx-2">
+            <span>@</span><span style="font-size: larger; font-family: 'Times New Roman', Times, serif;"><%= userName %></span>
+        </div>
+        <li class="border-top border-bottom border-secondary"><a class="dropdown-item" href="#">Edit Profile</a></li>
+        <li class="border-top border-bottom border-secondary"><a class="dropdown-item" href="#">Action</a></li>
+        <li class="border-top border-bottom border-secondary"><a class="dropdown-item" href="#">Another action</a></li>
+        <li class="border-top border-bottom border-secondary"><a class="dropdown-item" href="/logout">Logout</a></li>
+    </ul>
+</div>

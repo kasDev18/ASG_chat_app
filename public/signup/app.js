@@ -1,6 +1,4 @@
-const PRELOADING = "<div class='loader'><i class='fa fa-spin fa-spinner text-primary' style='font-size: 50px'></i></div>";
-
-const signupCont = document.querySelector('.signup');
+const signupCont = document.querySelector('.sign-up');
 const loaderCont = document.querySelector('.loader-cont');
 const uname = document.getElementById('name');
 const username = document.getElementById('username');
@@ -10,9 +8,8 @@ const invalidFeedback = document.querySelector('.invalid-feedback');
 
 invalidFeedback.innerTHML = '';
 
-loaderCont.innerHTML = PRELOADING;
+loaderCont.classList.remove('d-none');
 setTimeout(() => {
-    loaderCont.classList.add('d-none');
     signupCont.classList.remove('d-none');
 }, 1500);
 
